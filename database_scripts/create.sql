@@ -46,7 +46,7 @@ CREATE TABLE `shipment_status` (
   `name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`shipment_status_id`));
 
-CREATE TABLE `order` (
+CREATE TABLE `orders` (
   `order_id` INT NOT NULL AUTO_INCREMENT,
   `customer_id` INT NOT NULL,
   `order_status_id` INT NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE `shipment` (
   INDEX `fk_shipment_shipment_status_idx` (`shipment_status_id` ASC) VISIBLE,
   CONSTRAINT `fk_shipment_order`
     FOREIGN KEY (`order_id`)
-    REFERENCES `order` (`order_id`)
+    REFERENCES `orders` (`order_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_shipment_shipment_status`
@@ -98,7 +98,7 @@ CREATE TABLE `order_item` (
   INDEX `fk_order_item_product_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `fk_order_item_order`
     FOREIGN KEY (`order_id`)
-    REFERENCES `order` (`order_id`)
+    REFERENCES `orders` (`order_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_item_product`
@@ -107,11 +107,11 @@ CREATE TABLE `order_item` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-ALTER TABLE `9hPnX4LoJo`.`order` 
+ALTER TABLE `9hPnX4LoJo`.`orders` 
 ADD COLUMN `postage_type_id` INT NOT NULL AFTER `shipping_postcode`,
 ADD INDEX `fk_order_postage_type_idx` (`postage_type_id` ASC) VISIBLE;
 
-ALTER TABLE `9hPnX4LoJo`.`order` 
+ALTER TABLE `9hPnX4LoJo`.`orders` 
 ADD CONSTRAINT `fk_order_postage_type`
   FOREIGN KEY (`postage_type_id`)
   REFERENCES `9hPnX4LoJo`.`postage_type` (`postage_type_id`)
@@ -122,3 +122,18 @@ ALTER TABLE `9hPnX4LoJo`.`customer`
 ADD COLUMN `card_number` VARCHAR(100) NULL AFTER `shipping_postcode`,
 ADD COLUMN `card_name` VARCHAR(100) NULL AFTER `card_number`,
 ADD COLUMN `expiry_date` VARCHAR(45) NULL AFTER `card_name`;
+
+ALTER TABLE `9hPnX4LoJo`.`customer` 
+CHANGE COLUMN `shipping_address` `delivery_address` VARCHAR(500) NULL DEFAULT NULL ,
+CHANGE COLUMN `shipping_postcode` `delivery_postcode` VARCHAR(45) NULL DEFAULT NULL ;
+
+ALTER TABLE `9hPnX4LoJo`.`customer` 
+ADD COLUMN `title` VARCHAR(45) NULL AFTER `expiry_date`;
+
+ALTER TABLE `9hPnX4LoJo`.`customer` 
+ADD COLUMN `contact_email` TINYINT NULL AFTER `title`,
+ADD COLUMN `contact_post` TINYINT NULL AFTER `contact_email`,
+ADD COLUMN `contact_sms` TINYINT NULL AFTER `contact_post`;
+
+ALTER TABLE `9hPnX4LoJo`.`orders` 
+ADD COLUMN `order_total` DECIMAL(10,2) NULL AFTER `postage_type_id`;

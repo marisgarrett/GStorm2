@@ -51,7 +51,7 @@
                 Contact GStorm via calling 01879485243 or the details in the Contact Us page.
             </p>
             <div class="col-12 text-center">
-                <a href="/account/contact" class="pr-3 btn btn-success">CHANGE</a>
+                <a href="/contact" class="pr-3 btn btn-success">CONTACT US</a>
             </div>
         </div>
     </div>

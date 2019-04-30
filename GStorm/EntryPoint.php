@@ -23,7 +23,7 @@
             
             $routes = $this->routes->getRoutes();
 
-            if (isset($routes[$route]['login'])) {
+            if (isset($routes[$route]['requiresAuthentication'])) {
                 $this->routes->checkLogin();
             }
 
