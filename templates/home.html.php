@@ -23,8 +23,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button class="btn btn-danger mr-2">Wishlist</button>
-                        <button class="btn btn-success">Add To Basket</button>
+                        <a class="btn btn-danger mr-2" href="/wishlist/add?product_id=<?= $product->product_id ?>">Wishlist</a>
+                        <a class="btn btn-success mr-2" href="/basket/add?product_id=<?= $product->product_id ?>">Add To Basket</a>
                     </div>
                 </div>
             </div>

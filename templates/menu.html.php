@@ -70,12 +70,12 @@
                 </li>
             <?php } ?>
             <li class="nav-item pl-2 pr-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/wishlist/my">
                     <i class="fas fa-heart"></i>
                 </a>
             </li>
             <li class="nav-item pl-2 pr-2 mr-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/basket/my">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
             </li>

@@ -45,6 +45,7 @@ INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `category_i
 INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `category_id`, `is_featured`) VALUES ('17', 'Astro A20 Wireless Gaming Headset', 'Astro A20 Wireless Gaming Headset', '149.99', '6', '0');
 
 
+
 INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `category_id`, `is_featured`) VALUES ('4', 'Xbox One X with Tom Clancys The Division 2', 'Buy the Xbox One X Tom Clancy’s The Division 2 Bundle and put the fate of the free world in your hands. Lead your team of elite agents to save a country on the brink of collapse as you explore the open, dynamic, and hostile world of post-pandemic Washington, DC. This bundle includes a full-game download of Tom Clancy’s The Division 2, a 1-month Xbox Live Gold subscription, and a 1-month Xbox Game Pass trial. With true 4K gaming and 40% more power than any other console, there’s never been a better time to game with Xbox One X.', '449.99', '1', '1');
 
 INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `category_id`, `is_featured`) VALUES ('5', 'Xbox One X', 'With true 4K gaming and 40% more power than any other console, there’s never been a better time to game with Xbox One X.', '385', '1', '0');

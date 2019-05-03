@@ -17,11 +17,15 @@
             $orderItemTable = new \GStorm\DatabaseTable($pdo, 'order_item', 'order_item_id');
             $orderStatusTable = new \GStorm\DatabaseTable($pdo, 'order_status', 'order_status_id');
             $ordersTable = new \GStorm\DatabaseTable($pdo, 'orders', 'order_id', '\GStorm\entities\Order', [$orderItemTable, $orderStatusTable]);
+            $wishlistTable = new \GStorm\DatabaseTable($pdo, 'wishlist', 'wishlist_id', '\GStorm\entities\WishlistEntry', [$productsTable]);
+            $basketTable = new \GStorm\DatabaseTable($pdo, 'basket', 'basket_id', '\GStorm\entities\BasketEntry', [$productsTable]);
             
             $accountController = new \GStorm\controllers\AccountController($customersTable, $ordersTable);
             $checkoutController = new \GStorm\controllers\CheckoutController();
             $homeController = new \GStorm\controllers\HomeController($productsTable);
             $productController = new \GStorm\controllers\ProductController($productsTable, $categoryTable);
+            $wishlistController = new \GStorm\controllers\WishlistController($wishlistTable);
+            $basketController = new \GStorm\controllers\BasketController($basketTable);
 
             $routes = [
                 '' => [
@@ -138,10 +142,39 @@
                         'requiresAuthentication' => true
                     ]
                 ],
-                'checkout/basket' => [
+                'basket/add' => [
                     'GET' => [
-                        'controller' => $checkoutController,
-                        'function' => 'basket'
+                        'controller' => $basketController,
+                        'function' => 'add',
+                        'requiresAuthentication' => true
+                    ]
+                ],
+                'basket/decrease' => [
+                    'GET' => [
+                        'controller' => $basketController,
+                        'function' => 'decrease',
+                        'requiresAuthentication' => true
+                    ]
+                ],
+                'basket/increase' => [
+                    'GET' => [
+                        'controller' => $basketController,
+                        'function' => 'increase',
+                        'requiresAuthentication' => true
+                    ]
+                ],
+                'basket/my' => [
+                    'GET' => [
+                        'controller' => $basketController,
+                        'function' => 'my',
+                        'requiresAuthentication' => true
+                    ]
+                ],
+                'basket/remove' => [
+                    'GET' => [
+                        'controller' => $basketController,
+                        'function' => 'remove',
+                        'requiresAuthentication' => true
                     ]
                 ],
                 'checkout/billing' => [
@@ -179,7 +212,28 @@
                         'controller' => $productController,
                         'function' => 'searchSubmit'
                     ]
-                ]
+                ],
+                'wishlist/add' => [
+                    'GET' => [
+                        'controller' => $wishlistController,
+                        'function' => 'add',
+                        'requiresAuthentication' => true
+                    ]
+                ],
+                'wishlist/my' => [
+                    'GET' => [
+                        'controller' => $wishlistController,
+                        'function' => 'my',
+                        'requiresAuthentication' => true
+                    ]
+                ],
+                'wishlist/remove' => [
+                    'GET' => [
+                        'controller' => $wishlistController,
+                        'function' => 'remove',
+                        'requiresAuthentication' => true
+                    ]
+                ],
             ];
 
             return $routes;

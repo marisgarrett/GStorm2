@@ -13,14 +13,6 @@
             ];
         }
 
-        public function basket() {
-            return [
-                'template' => 'basket.html.php',
-                'title' => "Basket",
-                'variables' => []
-            ];
-        }
-
         public function billing() {
             return [
                 'template' => 'billing.html.php',

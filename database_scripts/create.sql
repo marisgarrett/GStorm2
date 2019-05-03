@@ -137,3 +137,42 @@ ADD COLUMN `contact_sms` TINYINT NULL AFTER `contact_post`;
 
 ALTER TABLE `9hPnX4LoJo`.`orders` 
 ADD COLUMN `order_total` DECIMAL(10,2) NULL AFTER `postage_type_id`;
+
+CREATE TABLE `9hPnX4LoJo`.`wishlist` (
+  `wishlist_id` INT NOT NULL AUTO_INCREMENT,
+  `customer_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  PRIMARY KEY (`wishlist_id`),
+  INDEX `fk_wishlist_customer_idx` (`customer_id` ASC) VISIBLE,
+  INDEX `fk_wishlist_product_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_wishlist_customer`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `9hPnX4LoJo`.`customer` (`customer_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_wishlist_product`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `9hPnX4LoJo`.`product` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `9hPnX4LoJo`.`basket` (
+  `basket_id` INT NOT NULL AUTO_INCREMENT,
+  `customer_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  PRIMARY KEY (`basket_id`),
+  INDEX `fk_basket_product_idx` (`product_id` ASC) VISIBLE,
+  INDEX `fk_basket_customer_idx` (`customer_id` ASC) VISIBLE,
+  CONSTRAINT `fk_basket_product`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `9hPnX4LoJo`.`product` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_basket_customer`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `9hPnX4LoJo`.`customer` (`customer_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+ALTER TABLE `9hPnX4LoJo`.`basket` 
+ADD COLUMN `quantity` INT NULL DEFAULT 1 AFTER `product_id`;
